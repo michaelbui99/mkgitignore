@@ -14,3 +14,19 @@ Template name must match the exact name in the github/gitignore repository witho
 ```bash
 $ python mkgitignore/main.py Unity
 ```
+
+# Setup
+
+Download the setup.ps1 (windows) or setup.sh (linux)
+
+Run the script
+
+```bash
+$ ./setup.ps1
+```
+
+or
+
+```bash
+$ chmod +x ./setup.sh && ./setup.sh
+```
