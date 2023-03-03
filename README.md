@@ -15,7 +15,7 @@ Template name must match the exact name in the github/gitignore repository witho
 $ python mkgitignore/main.py Unity
 ```
 
-If you have followed:
+If you have followed "Setup":
 ```bash
 $ mkgitignore Unity
 ```
