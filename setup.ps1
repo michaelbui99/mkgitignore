@@ -23,16 +23,26 @@ python -m venv venv
 Write-Output "Installing dependencies..."
 pip install -r requirements.txt
 
-Write-Output "Adding new function to $PROFILE ..."
-$scriptFunction = @"
+$regex = "#MKGITIGNORE_FUNCTION_SETUP_TAG"
+$currentProfileContent = Get-Content $PROFILE
+
+if (!($currentProfileContent -match $regex)) {
+    Write-Output "Adding new function to $PROFILE ..."
+    $scriptFunction = @"
 function mkgitignore(`$template) {
+    #MKGITIGNORE_FUNCTION_SETUP_TAG
     $HOME\Scripts\mkgitignore\venv\Scripts\Activate.ps1
     python $HOME\Scripts\mkgitignore\mkgitignore\main.py `$template
 }
 "@
+    Write-Output `n >> $PROFILE
+    Write-Output $scriptFunction >> $PROFILE
 
-Write-Output `n >> $PROFILE
-Write-Output $scriptFunction >> $PROFILE
+}
+else {
+    Write-Output "powershell function has already been setup, skipping..."
+}
+
 
 Set-Location $workingDir
 . $PROFILE
